@@ -30,7 +30,7 @@ def get_sphere_params(data: SphereParams):
 # /ur5e/toolpose subscriber
 def get_toolpose(data):
 	global toolpose
-	toolpose = data.data
+	toolpose = data
 
 # /rqt_toggle
 def rqt_listener(data):
@@ -111,12 +111,15 @@ if __name__ == '__main__':
 			# add robot starting position as initial point
 			setup_point(initial_toolpose.linear.x, initial_toolpose.linear.y, initial_toolpose.linear.z, roll, pitch, yaw, plan, 0)
 			# add rest of points in plan
-			setup_point(-0.0142, -0.4095, 0.2713, roll, pitch, yaw, plan, 0)
-			setup_point(x, y, z + (rad*2), roll, pitch, yaw, plan, 0)
-			setup_point(x, y, z + 0.02, roll, pitch, yaw, plan, 0)
+			y_offset = -0.01
+			z_offset = 0.02
+			setup_point(x, y+y_offset, z + (rad*2), roll, pitch, yaw, plan, 0)
+			setup_point(x, y+y_offset, z + z_offset, roll, pitch, yaw, plan, 0)
+			setup_point(x, y+y_offset, z + z_offset, roll, pitch, yaw, plan, 2)
 			setup_point(x, y, z + (rad*2), roll, pitch, yaw, plan, 0)
 			setup_point(x + (rad*4), y, z + (rad*2), roll, pitch, yaw, plan, 0)
-			setup_point(x + (rad*4), y, z + rad, roll, pitch, yaw, plan, 0)
+			setup_point(x + (rad*4), y, z + z_offset, roll, pitch, yaw, plan, 0)
+			setup_point(x + (rad*4), y, z + z_offset, roll, pitch, yaw, plan, 1)
 			setup_point(x + (rad*4), y, z + (rad*2), roll, pitch, yaw, plan, 0)
 			# publish the plan
 			if not rqt_toggle:
