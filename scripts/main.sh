@@ -26,7 +26,7 @@ roslaunch realsense2_camera rs_rgbd.launch
 rosrun ur5e_control ur5e_ros_connection.sh
 
 #initialize real robot
-manual_initialization_real_robot.py
+rosrun ur5e_control manual_initialization_real_robot.py
 #
 
 
